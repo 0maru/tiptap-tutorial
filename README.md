@@ -1,36 +1,47 @@
-# Welcome to Remix + Vite!
+# tiptap-tutorial
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+## 手順
 
-## Development
+### 1. ディレクトリの作成
 
-Run the Vite dev server:
-
-```shellscript
-npm run dev
+```
+mkdir tiptap-tutorial
 ```
 
-## Deployment
+### 2. プロジェクトの作成
 
-First, build your app for production:
-
-```sh
-npm run build
+```
+npx create-remix@latest .
 ```
 
-Then run the app in production mode:
+選択肢は以下の通り
 
-```sh
-npm start
+Initialize a new git repository? (recommended)  
+Yes  
+
+Install dependencies with npm? (recommended)
+Yes
+
 ```
+> npx create-remix@latest .
 
-Now you'll need to pick a host to deploy it to.
+ remix   v2.9.2 💿 Let's build a better website...
+      ◼  Directory: Using . as project directory
 
-### DIY
+      ◼  Using basic template See https://remix.run/guides/templates for more
+      ✔  Template copied
+   git   Initialize a new git repository? (recommended)
+         ● Yes  ○ No
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+  deps   Install dependencies with npm? (recommended)
+         ● Yes  ○ No
 
-Make sure to deploy the output of `npm run build`
+      ✔  Dependencies installed
 
-- `build/server`
-- `build/client`
+      ✔  Git initialized
+  
+  done   That's it!
+         Check out README.md for development and deploy instructions.
+
+         Join the community at https://rmx.as/discord
+```
