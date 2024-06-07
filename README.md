@@ -17,7 +17,7 @@ npx create-remix@latest .
 選択肢は以下の通り
 
 Initialize a new git repository? (recommended)  
-Yes  
+Yes
 
 Install dependencies with npm? (recommended)
 Yes
@@ -45,3 +45,35 @@ Yes
 
          Join the community at https://rmx.as/discord
 ```
+
+### 3. radix-ui/themes のインストール
+
+radix-ui/themes はコンポーネントライブラリ
+スタイルまで提供されているのでいわゆるradix-ui/themes っぽいデザインになる
+Bootstrap や Vuetify のような感じ
+
+themes の他にprimitives というライブラリも提供されていて、 radix-ui/primitives を使うと、
+css のあたってないコンポーネントを使用することができる。
+スタイルを当てるのはcss やtailwindcss などを使うとよい
+もともとのスタイルもないので、魔改造になることもなく独自のコンポーネントを定義しやすく、機能やアクセシビリティのみを提供したHeadless UIライブラリ。
+
+今回はCSSは書かない方針なので、themes を採用した。
+
+https://www.radix-ui.com/
+
+```
+npm install @radix-ui/themes
+```
+
+root.tsx に css を追加する
+
+```tsx
+import '@radix-ui/themes/styles.css';
+```
+
+### 4. 実行する
+
+```shell
+npm run dev
+```
+
