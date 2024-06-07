@@ -77,3 +77,8 @@ import '@radix-ui/themes/styles.css';
 npm run dev
 ```
 
+### 5. tiptap のインストール
+
+```shell
+npm install @tiptap/react @tiptap/starter-kit
+```
