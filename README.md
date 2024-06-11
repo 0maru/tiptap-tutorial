@@ -122,3 +122,68 @@ npm run dev
 ```shell
 npm install @tiptap/react @tiptap/starter-kit
 ```
+
+### 6. tiptap を埋め込む
+
+app の下に `components` ディレクトリを作成し、その中に `CustomEditor.tsx` を作成する
+
+```shell
+mkdir app/components
+touch app/components/CustomEditor.tsx
+```
+
+```tsx
+import { EditorContent, useEditor } from '@tiptap/react'
+import { StarterKit } from '@tiptap/starter-kit'
+
+const CustomEditor = () => {
+  const editor = useEditor(
+    {
+      extensions: [StarterKit]
+    }
+  )
+  return (
+    <EditorContent editor={editor} />
+  )
+}
+
+export default CustomEditor
+```
+
+### 7. ブラウザで確認する
+
+ただのテキストボックスがあることが確認できる
+
+### 8. プレビューできるようにする
+
+エディターとなるべきコンポーネントの横に、エディターに入力している内容をリアルタイムで表示できるプレビューコンポーネントを作成する
+tiptap は入力したテキストをHTMLの形式で扱うことができるので、HTML形式とテキスト形式のプレビューを作成する
+
+```tsx
+import { EditorContent, useEditor } from '@tiptap/react'
+import { StarterKit } from '@tiptap/starter-kit'
+import { Box, Flex } from '@radix-ui/themes'
+
+const CustomEditor = () => {
+  const editor = useEditor(
+    {
+      extensions: [StarterKit]
+    }
+  )
+  return (
+    <Flex direction={'row'} gap="2">
+      <Box minWidth={'50vw'}>
+        <EditorContent editor={editor} />
+      </Box>
+      <Box minWidth={'50vw'}>
+        <p>プレビュー（HTML）</p>
+        <div>{editor?.getHTML()}</div>
+        <p>プレビュー（テキスト）</p>
+        <div>{editor?.getText()}</div>
+      </Box>
+    </Flex>
+  )
+}
+
+export default CustomEditor
+```
