@@ -1,3 +1,5 @@
+'use client'
+
 import type { MetaFunction } from '@remix-run/node'
 import CustomEditor from '~/components/CustomEditor'
 import { Box } from '@radix-ui/themes'

@@ -70,7 +70,7 @@ css のあたってないコンポーネントを使用することができる�
 https://www.radix-ui.com/
 
 ```
-npm install @radix-ui/themes
+npm install @radix-ui/themes @radix-ui/react-icons
 ```
 
 root.tsx に css を追加する
@@ -79,12 +79,15 @@ root.tsx に css を追加する
 import '@radix-ui/themes/styles.css';
 ```
 
-root.tsx の `{children}` を`<Theme>` で囲む
+root.tsx の `{children}` を`<Theme>` で囲み、ファイルの先頭に `'use client'` を追加する
 
 ```tsx
+'use client'
+
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, } from '@remix-run/react'
 import '@radix-ui/themes/styles.css'
 import { Theme } from '@radix-ui/themes'
+
 
 export function Layout({children} : { children : React.ReactNode }) {
   return (
@@ -187,3 +190,116 @@ const CustomEditor = () => {
 
 export default CustomEditor
 ```
+
+### 9. getHTML() で取得した内容をHTMLのタグを反映してプレビューする
+
+```tsx
+import { EditorContent, useEditor } from '@tiptap/react'
+import { StarterKit } from '@tiptap/starter-kit'
+import { Box, Flex } from '@radix-ui/themes'
+
+const CustomEditor = () => {
+  const editor = useEditor(
+    {
+      extensions: [StarterKit]
+    }
+  )
+  return (
+    <Flex direction={'row'} gap="2">
+      <Box minWidth={'50vw'}>
+        <EditorContent editor={editor} />
+      </Box>
+      <Box minWidth={'50vw'}>
+        <p>プレビュー（HTML）</p>
+        <div>{editor?.getHTML()}</div>
+        {editor && (
+          <div dangerouslySetInnerHTML={{__html: editor!.getHTML()}} />
+        )}
+        <p>プレビュー（テキスト）</p>
+        <div>{editor?.getText()}</div>
+      </Box>
+    </Flex>
+  )
+}
+
+export default CustomEditor
+```
+
+### 10. HTMLを装飾する機能を実装する
+
+太字（Bold）や斜体（Italic）などの装飾機能を実装する
+
+#### 10-1. Toolbar.tsx を作成する
+
+```shell
+touch app/components/Toolbar.tsx
+```
+
+#### 10-2. Toolbar.tsx を実装する
+
+```tsx
+import { Box, Button } from '@radix-ui/themes'
+import { FontBoldIcon, FontItalicIcon, StrikethroughIcon, } from '@radix-ui/react-icons'
+import { Editor } from '@tiptap/react'
+
+const Toolbar = ({editor} : { editor : Editor }) => {
+  return (
+    <Box>
+      {/*テキストを太字にするボタン*/}
+      <Button onClick={editor.commands.setBold}>
+        <FontBoldIcon />
+      </Button>
+      {/*テキストを斜体にするボタン*/}
+      <Button onClick={editor.commands.setItalic}>
+        <FontItalicIcon />
+      </Button>
+      {/*テキストに打ち消し線を追加するボタン*/}
+      <Button onClick={editor.commands.setStrike}>
+        <StrikethroughIcon />
+      </Button>
+    </Box>
+  )
+}
+
+export default Toolbar
+```
+
+### 10-3. _index.tsx に Toolbar を埋め込む
+
+```tsx
+import { EditorContent, useEditor } from '@tiptap/react'
+import { StarterKit } from '@tiptap/starter-kit'
+import { Box, Flex } from '@radix-ui/themes'
+import Toolbar from '~/components/Toolbar'
+
+const CustomEditor = () => {
+  const editor = useEditor(
+    {
+      extensions: [StarterKit]
+    }
+  )
+  return (
+    <Flex direction={'row'} gap="2">
+      <Box minWidth={'50vw'}>
+        <EditorContent editor={editor} />
+        {editor && (
+          <Toolbar editor={editor} />
+        )}
+      </Box>
+      <Box minWidth={'50vw'}>
+        <p>プレビュー（HTML）</p>
+        <div>{editor?.getHTML()}</div>
+        {editor && (
+          <div dangerouslySetInnerHTML={{__html: editor!.getHTML()}} />
+        )}
+        <p>プレビュー（テキスト）</p>
+        <div>{editor?.getText()}</div>
+      </Box>
+    </Flex>
+  )
+}
+
+export default CustomEditor
+```
+
+テキストを入力して、太字や斜体、打ち消し線を適用できることが確認できる
