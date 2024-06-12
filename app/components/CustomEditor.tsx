@@ -24,7 +24,7 @@ const CustomEditor = () => {
           <Toolbar editor={editor}/>
         )}
       </Box>
-      <Box minWidth={'50vw'}>
+      <Box minWidth={'50vw'} className={'preview'}>
         <p>プレビュー（HTML）</p>
         <div>{editor?.getHTML()}</div>
         {editor && (

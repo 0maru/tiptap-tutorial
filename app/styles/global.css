@@ -1,0 +1,20 @@
+p {
+  margin: 0;
+  line-height: 20px;
+}
+
+.tiptap {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+blockquote {
+  margin: 0 0 0 0.5rem;
+  padding-left: 0.3rem;
+  border-left: 2px solid #ddd;
+}
+
+.preview code {
+  padding: 2px;
+  background-color: #dddddd;
+}

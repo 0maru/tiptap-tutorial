@@ -1,6 +1,13 @@
 import {Box, Button} from '@radix-ui/themes'
 import {Editor} from '@tiptap/react'
-import {BoldIcon, ItalicIcon, ListOrderedIcon, ListUnorderedIcon, StrikethroughIcon} from '@primer/octicons-react'
+import {
+  BoldIcon, CodeIcon,
+  ItalicIcon, LinkIcon,
+  ListOrderedIcon,
+  ListUnorderedIcon,
+  QuoteIcon,
+  StrikethroughIcon
+} from '@primer/octicons-react'
 
 const Toolbar = ({editor}: { editor: Editor }) => {
   return (
@@ -24,6 +31,12 @@ const Toolbar = ({editor}: { editor: Editor }) => {
       {/*数字付きのリスト表記にするボタン*/}
       <Button onClick={editor.chain().focus().toggleOrderedList().run}>
         <ListOrderedIcon/>
+      </Button>
+      <Button onClick={editor.chain().focus().toggleBlockquote().run}>
+        <QuoteIcon/>
+      </Button>
+      <Button onClick={editor.chain().focus().toggleCode().run}>
+        <CodeIcon/>
       </Button>
     </Box>
   )
