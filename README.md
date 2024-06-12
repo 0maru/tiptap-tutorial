@@ -70,7 +70,7 @@ css のあたってないコンポーネントを使用することができる�
 https://www.radix-ui.com/
 
 ```
-npm install @radix-ui/themes @radix-ui/react-icons
+npm install @radix-ui/themes @primer/octicons-react
 ```
 
 root.tsx に css を追加する
@@ -238,24 +238,32 @@ touch app/components/Toolbar.tsx
 #### 10-2. Toolbar.tsx を実装する
 
 ```tsx
-import { Box, Button } from '@radix-ui/themes'
-import { FontBoldIcon, FontItalicIcon, StrikethroughIcon, } from '@radix-ui/react-icons'
-import { Editor } from '@tiptap/react'
+import {Box, Button} from '@radix-ui/themes'
+import {Editor} from '@tiptap/react'
+import {BoldIcon, ItalicIcon, ListOrderedIcon, ListUnorderedIcon, StrikethroughIcon} from '@primer/octicons-react'
 
-const Toolbar = ({editor} : { editor : Editor }) => {
+const Toolbar = ({editor}: { editor: Editor }) => {
   return (
     <Box>
       {/*テキストを太字にするボタン*/}
       <Button onClick={editor.commands.setBold}>
-        <FontBoldIcon />
+        <BoldIcon/>
       </Button>
       {/*テキストを斜体にするボタン*/}
       <Button onClick={editor.commands.setItalic}>
-        <FontItalicIcon />
+        <ItalicIcon/>
       </Button>
       {/*テキストに打ち消し線を追加するボタン*/}
       <Button onClick={editor.commands.setStrike}>
-        <StrikethroughIcon />
+        <StrikethroughIcon/>
+      </Button>
+      {/*リスト表記にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleBulletList().run}>
+        <ListUnorderedIcon/>
+      </Button>
+      {/*数字付きのリスト表記にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleOrderedList().run}>
+        <ListOrderedIcon/>
       </Button>
     </Box>
   )
