@@ -152,19 +152,50 @@ export default function App() {
 }
 ```
 
-### 4. 実行する
+### 4. css を追加する
+
+```shell
+touch app/styles/global.css
+```
+
+```css
+p {
+  margin: 0;
+  line-height: 20px;
+}
+
+.tiptap {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+blockquote {
+  margin: 0 0 0 0.5rem;
+  padding-left: 0.3rem;
+  border-left: 2px solid #ddd;
+}
+
+.preview code {
+  padding: 2px;
+  background-color: #dddddd;
+}
+
+```
+
+
+### 5. 実行する
 
 ```shell
 npm run dev
 ```
 
-### 5. tiptap のインストール
+### 6. tiptap のインストール
 
 ```shell
 npm install @tiptap/react @tiptap/starter-kit
 ```
 
-### 6. tiptap を埋め込む
+### 7. tiptap を埋め込む
 
 app の下に `components` ディレクトリを作成し、その中に `CustomEditor.tsx` を作成する
 
@@ -191,11 +222,11 @@ const CustomEditor = () => {
 export default CustomEditor
 ```
 
-### 7. ブラウザで確認する
+### 8. ブラウザで確認する
 
 ただのテキストボックスがあることが確認できる
 
-### 8. プレビューできるようにする
+### 9. プレビューできるようにする
 
 エディターとなるべきコンポーネントの横に、エディターに入力している内容をリアルタイムで表示できるプレビューコンポーネントを作成する
 tiptap は入力したテキストをHTMLの形式で扱うことができるので、HTML形式とテキスト形式のプレビューを作成する
@@ -229,7 +260,7 @@ const CustomEditor = () => {
 export default CustomEditor
 ```
 
-### 9. getHTML() で取得した内容をHTMLのタグを反映してプレビューする
+### 10. getHTML() で取得した内容をHTMLのタグを反映してプレビューする
 
 ```tsx
 import { EditorContent, useEditor } from '@tiptap/react'
@@ -263,17 +294,17 @@ const CustomEditor = () => {
 export default CustomEditor
 ```
 
-### 10. HTMLを装飾する機能を実装する
+### 11. HTMLを装飾する機能を実装する
 
 太字（Bold）や斜体（Italic）などの装飾機能を実装する
 
-#### 10-1. Toolbar.tsx を作成する
+#### 11-1. Toolbar.tsx を作成する
 
 ```shell
 touch app/components/Toolbar.tsx
 ```
 
-#### 10-2. Toolbar.tsx を実装する
+#### 11-2. Toolbar.tsx を実装する
 
 ```tsx
 import { Box, Button } from '@radix-ui/themes'
@@ -284,16 +315,16 @@ const Toolbar = ({editor} : { editor : Editor }) => {
   return (
     <Box>
       {/*テキストを太字にするボタン*/}
-      <Button onClick={editor.commands.setBold}>
-        <BoldIcon />
+      <Button onClick={editor.chain().focus().toggleBold().run}>
+        <BoldIcon/>
       </Button>
       {/*テキストを斜体にするボタン*/}
-      <Button onClick={editor.commands.setItalic}>
-        <ItalicIcon />
+      <Button onClick={editor.chain().focus().toggleItalic().run}>
+        <ItalicIcon/>
       </Button>
       {/*テキストに打ち消し線を追加するボタン*/}
-      <Button onClick={editor.commands.setStrike}>
-        <StrikethroughIcon />
+      <Button onClick={editor.chain().focus().toggleStrike().run}>
+        <StrikethroughIcon/>
       </Button>
       {/*リスト表記にするボタン*/}
       <Button onClick={editor.chain().focus().toggleBulletList().run}>
@@ -310,7 +341,7 @@ const Toolbar = ({editor} : { editor : Editor }) => {
 export default Toolbar
 ```
 
-### 10-3. _index.tsx に Toolbar を埋め込む
+### 11-3. _index.tsx に Toolbar を埋め込む
 
 ```tsx
 import { EditorContent, useEditor } from '@tiptap/react'
@@ -354,6 +385,51 @@ export default CustomEditor
 
 Toolbar.tsx に引用とコードブロックの機能を追加する
 
-```
+```tsx
+import {Box, Button} from '@radix-ui/themes'
+import {Editor} from '@tiptap/react'
+import {
+  BoldIcon,
+  CodeIcon,
+  ItalicIcon,
+  ListOrderedIcon,
+  ListUnorderedIcon,
+  QuoteIcon,
+  StrikethroughIcon
+} from '@primer/octicons-react'
 
+const Toolbar = ({editor}: { editor: Editor }) => {
+  return (
+    <Box>
+      {/*テキストを太字にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleBold().run}>
+        <BoldIcon/>
+      </Button>
+      {/*テキストを斜体にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleItalic().run}>
+        <ItalicIcon/>
+      </Button>
+      {/*テキストに打ち消し線を追加するボタン*/}
+      <Button onClick={editor.chain().focus().toggleStrike().run}>
+        <StrikethroughIcon/>
+      </Button>
+      {/*リスト表記にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleBulletList().run}>
+        <ListUnorderedIcon/>
+      </Button>
+      {/*数字付きのリスト表記にするボタン*/}
+      <Button onClick={editor.chain().focus().toggleOrderedList().run}>
+        <ListOrderedIcon/>
+      </Button>
+      <Button onClick={editor.chain().focus().toggleBlockquote().run}>
+        <QuoteIcon/>
+      </Button>
+      <Button onClick={editor.chain().focus().toggleCode().run}>
+        <CodeIcon/>
+      </Button>
+    </Box>
+  )
+}
+
+export default Toolbar
 ```
