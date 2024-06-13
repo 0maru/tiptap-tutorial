@@ -1,4 +1,6 @@
-# tiptap-tutorial
+# TipTap-tutorial
+
+[TipTap | https://tiptap.dev/](https://tiptap.dev/)
 
 このチュートリアルをやるには18以降のNode.js が必要です。
 
@@ -8,7 +10,41 @@
 node -v
 ```
 
-## 手順
+## tiptap
+
+Headless Editor Framework
+
+従来のWYSIWYGエディタ（Quill.js、Draft.js）と異なりエディターのコア機能だけが提供されており、   
+独自UIでエディタを作ることができる。
+
+[Quill.js | https://quilljs.com/](https://quilljs.com/)  
+ZoomやFigmaで利用されている。（過去にはSlackでも利用されていたみたい？）
+
+[Draft.js | https://draftjs.org/](https://draftjs.org/)  
+Facebook Open Source のプロジェクト
+
+Draft.js はプロジェクトがアーカイブされていて、メンテナンスされていない。    
+新しいLexicalというプロジェクトが立ち上がっている。
+
+[lexical | https://lexical.dev/](https://lexical.dev/)
+
+Headless Editor Framework
+
+[TipTap | https://tiptap.dev/](https://tiptap.dev/)
+
+Headless Editor Framework  
+ProseMirror をベースに機能追加したもの。
+
+TipTap は有償のProプランなどもあり、公式からExtension が多数出ているので、簡単にエディタを作りたいならTipTap、  
+ガンガンカスタマイズして、独自のエディタを作りたいなら、lexical or ProseMirror を直接使うと良さそう。
+
+[TipTap Pricing | https://tiptap.dev/pricing](https://tiptap.dev/pricing)  
+[TipTap Extensions | https://tiptap.dev/docs/editor/extensions](https://tiptap.dev/docs/editor/extensions)  
+
+Backlog は公式ブログによるとProseMirror を使っている。
+
+
+## ハンズオン
 
 ### 1. ディレクトリの作成
 
@@ -65,7 +101,9 @@ css のあたってないコンポーネントを使用することができる�
 スタイルを当てるのはcss やtailwindcss などを使うとよい
 もともとのスタイルもないので、魔改造になることもなく独自のコンポーネントを定義しやすく、機能やアクセシビリティのみを提供したHeadless UIライブラリ。
 
-今回はCSSは書かない方針なので、themes を採用した。
+今回はCSSは書かない方針なので、themes を採用した。  
+アイコンにはGitHub が提供している Octicons を使用する。
+
 
 https://www.radix-ui.com/
 
@@ -238,32 +276,32 @@ touch app/components/Toolbar.tsx
 #### 10-2. Toolbar.tsx を実装する
 
 ```tsx
-import {Box, Button} from '@radix-ui/themes'
-import {Editor} from '@tiptap/react'
-import {BoldIcon, ItalicIcon, ListOrderedIcon, ListUnorderedIcon, StrikethroughIcon} from '@primer/octicons-react'
+import { Box, Button } from '@radix-ui/themes'
+import { Editor } from '@tiptap/react'
+import { BoldIcon, ItalicIcon, ListOrderedIcon, ListUnorderedIcon, StrikethroughIcon } from '@primer/octicons-react'
 
-const Toolbar = ({editor}: { editor: Editor }) => {
+const Toolbar = ({editor} : { editor : Editor }) => {
   return (
     <Box>
       {/*テキストを太字にするボタン*/}
       <Button onClick={editor.commands.setBold}>
-        <BoldIcon/>
+        <BoldIcon />
       </Button>
       {/*テキストを斜体にするボタン*/}
       <Button onClick={editor.commands.setItalic}>
-        <ItalicIcon/>
+        <ItalicIcon />
       </Button>
       {/*テキストに打ち消し線を追加するボタン*/}
       <Button onClick={editor.commands.setStrike}>
-        <StrikethroughIcon/>
+        <StrikethroughIcon />
       </Button>
       {/*リスト表記にするボタン*/}
       <Button onClick={editor.chain().focus().toggleBulletList().run}>
-        <ListUnorderedIcon/>
+        <ListUnorderedIcon />
       </Button>
       {/*数字付きのリスト表記にするボタン*/}
       <Button onClick={editor.chain().focus().toggleOrderedList().run}>
-        <ListOrderedIcon/>
+        <ListOrderedIcon />
       </Button>
     </Box>
   )
