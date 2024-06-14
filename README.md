@@ -402,7 +402,7 @@ const Toolbar = ({editor} : { editor : Editor }) => {
 export default Toolbar
 ```
 
-### 11-3. _index.tsx に Toolbar を埋め込む
+### 11-3. CustomEditor.tsx に Toolbar を埋め込む
 
 ```tsx
 import { EditorContent, useEditor } from '@tiptap/react'
