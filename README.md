@@ -1,7 +1,5 @@
 # TipTap-tutorial
 
-[TipTap | https://tiptap.dev/](https://tiptap.dev/)
-
 このチュートリアルをやるには18以降のNode.js が必要です。
 
 ターミナル端末で下記のコマンドを実行してNode.js のバージョンを確認してください。
@@ -10,17 +8,21 @@
 node -v
 ```
 
-## tiptap
+## TipTap
+
+[TipTap | https://tiptap.dev/](https://tiptap.dev/)
 
 Headless Editor Framework
 
 従来のWYSIWYGエディタ（Quill.js、Draft.js）と異なりエディターのコア機能だけが提供されており、   
 独自UIでエディタを作ることができる。
 
-[Quill.js | https://quilljs.com/](https://quilljs.com/)  
+[Quill.js | https://quilljs.com/](https://quilljs.com/)    
+
 ZoomやFigmaで利用されている。（過去にはSlackでも利用されていたみたい？）
 
-[Draft.js | https://draftjs.org/](https://draftjs.org/)  
+[Draft.js | https://draftjs.org/](https://draftjs.org/)    
+
 Facebook Open Source のプロジェクト
 
 Draft.js はプロジェクトがアーカイブされていて、メンテナンスされていない。    
@@ -35,13 +37,14 @@ Headless Editor Framework
 Headless Editor Framework  
 ProseMirror をベースに機能追加したもの。
 
-TipTap は有償のProプランなどもあり、公式からExtension が多数出ているので、簡単にエディタを作りたいならTipTap、  
-ガンガンカスタマイズして、独自のエディタを作りたいなら、lexical or ProseMirror を直接使うと良さそう。
+TipTap は有償のProプランなどもあり、公式からExtension が多数出ている。  
+パーツを組み合わせて簡単にエディタを作りたいならTipTap、 ガンガンカスタマイズして、独自のエディタを作りたいなら、lexical or ProseMirror を直接使うと良さそう。  
 
-[TipTap Pricing | https://tiptap.dev/pricing](https://tiptap.dev/pricing)  
-[TipTap Extensions | https://tiptap.dev/docs/editor/extensions](https://tiptap.dev/docs/editor/extensions)  
+[TipTap Pricing | https://tiptap.dev/pricing](https://tiptap.dev/pricing)    
 
-Backlog は公式ブログによるとProseMirror を使っている。
+[TipTap Extensions | https://tiptap.dev/docs/editor/extensions](https://tiptap.dev/docs/editor/extensions)    
+
+Backlog はによるとProseMirror を使っている。
 
 
 ## ハンズオン
@@ -100,6 +103,13 @@ themes の他にprimitives というライブラリも提供されていて、 r
 css のあたってないコンポーネントを使用することができる。
 スタイルを当てるのはcss やtailwindcss などを使うとよい
 もともとのスタイルもないので、魔改造になることもなく独自のコンポーネントを定義しやすく、機能やアクセシビリティのみを提供したHeadless UIライブラリ。
+
+他には
+
+- react-aria
+- Headless UI
+
+などがある  
 
 今回はCSSは書かない方針なので、themes を採用した。  
 アイコンにはGitHub が提供している Octicons を使用する。
